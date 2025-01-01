@@ -1,16 +1,23 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+from dotenv import load_dotenv
+import os
 
-SQLALCHEMY_DATABASE_URL = (
-    "mysql+pymysql://root:test1234!@127.0.0.1:3306/TodoApplicationDatabase"
-)
+# Get the directory of the current script
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Build the path to the .env.dev file in the root directory
+dotenv_path = os.path.join(current_dir, "..", ".env.dev")
+
+# Load the local environment attributes
+load_dotenv(dotenv_path=dotenv_path)
+
+SQLALCHEMY_DATABASE_URL = os.getenv("POSTGRESQL_DATABASE_URL")
 """URL to create a location of this DataBase on the FastAPI application.
-    Give path where database is located.
-    - For sqllite, if db is created locally within the application, the URL looks like this:
-    sqlite:///./todosapp.db
-    - For PostgreSQL
-    postgresql://postgres:test1234!@localhost/TodoApplicationDatabase
+    Choose the relevant database URL from the env file.
+    Available dbs...
+    SQLLITE_DATABASE_URL, POSTGRESQL_DATABASE_URL, MYSQL_DATABASE_URL
 """
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)

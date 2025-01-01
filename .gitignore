@@ -28,6 +28,7 @@ ipython_config.py
 # Virtual environments
 **/.venv/
 **/env/
+.env*
 
 # VS Code
 **/.vscode/

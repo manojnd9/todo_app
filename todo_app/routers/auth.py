@@ -7,6 +7,8 @@ from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from jose import jwt, JWTError
+from dotenv import load_dotenv
+import os
 
 from todo_app.models import Users
 from todo_app.database import SessionLocal
@@ -21,8 +23,13 @@ bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_bearer = OAuth2PasswordBearer(tokenUrl="auth/token")
 
 # JWT Set-up
-SECRET_KEY = "6f886f17e570f91b09afbdcea64790cea2d1017bb86419146eb57fd912dc14dd"
-ALGORITHM = "HS256"
+# Get the directory of the current script
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# Build the path to the .env.dev file in the root directory
+dotenv_path = os.path.join(current_dir, "..", "..", ".env.dev")
+load_dotenv(dotenv_path=dotenv_path)
+SECRET_KEY = os.getenv("SECRET_KEY")
+ALGORITHM = os.getenv("ALGORITHM")
 
 
 # Pydantic BaseModel to validate the incoming data from POST request
@@ -33,6 +40,7 @@ class CreateUserRequest(BaseModel):
     last_name: str
     password: str
     role: str
+    phone_number: str
 
 
 class Token(BaseModel):
@@ -105,6 +113,7 @@ async def create_user(db: db_dependency, create_user_request: CreateUserRequest)
         role=create_user_request.role,
         hashed_password=bcrypt_context.hash(create_user_request.password),
         is_active=True,
+        phone_number=create_user_request.phone_number
     )
 
     db.add(create_user_model)
