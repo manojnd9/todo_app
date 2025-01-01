@@ -14,7 +14,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 dotenv_path = os.path.join(current_dir, "..", "..", ".env.dev")
 load_dotenv(dotenv_path=dotenv_path)
 
-SQLALCHEMY_DATABASE_URL = os.getenv("POSTGRESQL_DATABASE_URL") 
+SQLALCHEMY_DATABASE_URL = os.getenv("POSTGRESQL_DATABASE_URL")
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -79,9 +79,7 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()
