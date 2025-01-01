@@ -41,3 +41,9 @@ def test_admin_delete_todos(test_todo):
     model = db.query(ToDos).filter(ToDos.id == 1).first()
 
     assert model is None
+
+
+def test_admin_del_todo_not_found(test_todo):
+    response = client.delete("/admin/todo/999")
+    assert response.status_code == status.HTTP_404_NOT_FOUND
+    assert response.json() == {"detail": "Todo not found!"}
