@@ -44,6 +44,7 @@ class UserDataReturn(BaseModel):
     last_name: str
     is_active: bool
     role: str
+    phone_number: str | None
 
 
 # API End-Points
@@ -65,6 +66,7 @@ async def get_user_data(db: db_dependency, user: user_dependency):
         "last_name": user_data.last_name,
         "is_active": user_data.is_active,
         "role": user_data.role,
+        "phone_number": user_data.phone_number,
     }
 
     return return_user
@@ -85,5 +87,21 @@ async def change_user_password(
 
     user_model.hashed_password = bcrypt_context.hash(new_password)
 
+    db.add(user_model)
+    db.commit()
+
+
+@router.put("/update_phone/{phone_number}", status_code=status.HTTP_204_NO_CONTENT)
+async def update_phone_number(
+    db: db_dependency, user: user_dependency, phone_number: str = Path(min_length=10)
+):
+    if user is None:
+        raise HTTPException(status_code=401, detail="Authentication Failed!")
+    user_model = db.query(Users).filter(Users.id == user.get("id")).first()
+
+    if user_model is None:
+        raise HTTPException(status_code=404, detail="User not found!")
+
+    user_model.phone_number = phone_number
     db.add(user_model)
     db.commit()
