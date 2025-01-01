@@ -15,12 +15,18 @@ python-multipart = "^0.0.20"
 python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 psycopg2-binary = "^2.9.10"
 pymysql = "^1.1.1"
-alembic = "^1.14.0"
-python-dotenv = "^1.0.1"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.10.0"
+pytest = "^8.3.4"
+alembic = "^1.14.0"
+python-dotenv = "^1.0.1"
+pytest-cov = "^6.0.0"
+httpx = "^0.28.1"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
