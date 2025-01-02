@@ -1,5 +1,3 @@
-from starlette import status
-
 from tests.utils import (
     override_get_current_user,
     override_get_db,

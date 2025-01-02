@@ -3,7 +3,6 @@ from sqlalchemy.pool import StaticPool
 from sqlalchemy.orm import sessionmaker
 from fastapi.testclient import TestClient
 import pytest
-from passlib.context import CryptContext
 
 from todo_app.database import Base
 from todo_app.main import app
@@ -58,13 +57,13 @@ def test_todo():
     db = TestSessionLocal()
     db.add(todo)
     db.commit()
-    yield db
+    yield todo
     with engine.connect() as connection:
         connection.execute(text("DELETE FROM TODOS;"))
         connection.commit()
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture
 def test_user():
     user = Users(
         id=1,
@@ -81,7 +80,7 @@ def test_user():
     db = TestSessionLocal()
     db.add(user)
     db.commit()
-    yield db
+    yield user
     with engine.connect() as connection:
         connection.execute(text("DELETE FROM USERS;"))
         connection.commit()
