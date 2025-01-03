@@ -73,7 +73,6 @@
                 },
                 body: JSON.stringify(payload)
             });
-
             if (response.ok) {
                 window.location.href = '/todos/todo-page'; // Redirect to the todo page
             } else {
