@@ -1,4 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, status
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import RedirectResponse
 
 from todo_app.routers import auth, todos, admin, users
 from todo_app.models import Base
@@ -8,9 +10,17 @@ from todo_app.database import engine
 # to create the local database within FastAPI application
 Base.metadata.create_all(bind=engine)
 
-
 # FastAPI main application
 app = FastAPI()
+
+# Mount the static files path to app, so that FastAPI knows where to
+# find them
+app.mount("/static", StaticFiles(directory="todo_app/static"), name="static")
+
+
+@app.get("/")
+def test(request: Request):
+    return RedirectResponse(url="/todos/todo-page", status_code=status.HTTP_302_FOUND)
 
 
 @app.get("/health")
