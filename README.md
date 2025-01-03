@@ -3,6 +3,7 @@
 ![Python](https://img.shields.io/badge/Python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
 ![Uvicorn](https://img.shields.io/badge/Uvicorn-FF7700?style=for-the-badge&logo=uvicorn&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/postgresql-4169e1?style=for-the-badge&logo=postgresql&logoColor=white)
 
 ## Overview
 This is a simple ToDo app backend built using:
@@ -10,6 +11,7 @@ This is a simple ToDo app backend built using:
 - **Python**: Programming language for backend logic.
 - **FastAPI**: Framework for building APIs.
 - **Uvicorn**: ASGI server for running the application.
+- **PostgreSQL**: Data Base Management System
 
 The backend exposes APIs for managing ToDo tasks with basic operations like Create, Read, Update, and Delete (CRUD).
 

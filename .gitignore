@@ -32,3 +32,6 @@ ipython_config.py
 
 # VS Code
 **/.vscode/
+
+# Databases
+*.db

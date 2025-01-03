@@ -11,7 +11,7 @@ from todo_app.database import SessionLocal
 from todo_app.routers.auth import get_current_user
 
 # Instantiate FastAPI Router
-router = APIRouter(tags=["todos"])
+router = APIRouter(prefix="/todos", tags=["todos"])
 
 
 def get_db():
