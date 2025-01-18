@@ -21,7 +21,10 @@ SQLALCHEMY_DATABASE_URL = os.getenv("POSTGRESQL_DATABASE_URL")
 """
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
-"""Engine to connect the database session with the fastAPI application"""
+"""Engine to connect the database session with the fastAPI application.
+    If SQLLite is used as DB, make sure to add these connect_args to the engine:
+    connect_args={"check_same_thread": False}
+"""
 
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
