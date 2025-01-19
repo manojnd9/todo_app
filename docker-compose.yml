@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres
+    container_name: postgres-container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: test1234!
+      POSTGRES_DB: TodoApplicationDatabase
+    ports:
+      - "5432:5432"
+
+  todo-app:
+    build:
+      context: .
+    container_name: todo-container
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
