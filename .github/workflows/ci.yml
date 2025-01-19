@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      SQLALCHEMY_DATABASE_URL: sqlite:///./testdb.db
+      DATABASE_URL: sqlite:///./testdb.db
       SECRET_KEY: 32c13e3b5174ece2db353d022bc78c68f1551dd5ba3d1c48ae43880fe01693ac
       ALGORITHM: HS256
 
