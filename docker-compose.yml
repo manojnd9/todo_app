@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: test1234!
-      POSTGRES_DB: TodoApplicationDbDocker
+      POSTGRES_DB: TodoApplicationDatabase
     ports:
       - "5432:5432"
 
